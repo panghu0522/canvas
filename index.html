@@ -8,27 +8,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="canvas">
-    </div>
+    <canvas id="canvas"></canvas>
 <script>
-    canvas.onclick = (e) => {
-        console.log(e.clientX)
-        console.log(e.clientY)
-        //console.log 调试大法
-        let div = document.createElement('div')
-        div.style.position ='absolute'
-        div.style.left =e.clientX+'px'
-        div.style.top =e.clientY+'px'
-        div.style.border ='1px solid red'   
-        div.style.height ='6px'
-        div.style.width ='6px'
-        div.style.marginLeft ='-3px'
-        div.style.marginTop='-3px'
-        div.style.borderRadius='50%'
-        div.style.background='red'
-        canvas.appendChild(div)
+    let canvas = document.getElementById("canvas");
 
+    canvas.width = document.documentElement.clientWidth
+    canvas.height = document.documentElement.clientHeight
+    //画线
+    let ctx = canvas.getContext("2d");
+
+    let painting =false
+
+    ctx.fillStyle = "black";//(填充的颜色)
+    ctx.strokeStyle='none';//边框样式
+
+    canvas.onmousedown =() =>{
+        painting =true
     }
+    
+    canvas.onmousemove =(e)=>{
+        if(painting ===true){
+          //ctx.fillRect(e.clientX - 10, e.clientY - 10, 20, 20);  //花方形
+          ctx.beginPath();
+          ctx.arc(e.clientX, e.clientY,10,0,2 * Math.PI);
+          ctx.stroke();
+          ctx.fill();
+        }
+        // console.log(e.clientX)打印，点击的横轴
+        //console.log(e.clientY)打印，点击的竖轴
+         else{
+             console.log('什么都不做')
+         }
+    }
+
+    canvas.onmouseup=()=>{
+        painting=false
+    }
+
+    
+   
 </script>
 </body>
 </html>

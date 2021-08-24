@@ -5,6 +5,5 @@
 }
 
 #canvas {
-  border: 1px solid rgb(21, 21, 22);
-  height: 100vh;
+  display: block;
 }
